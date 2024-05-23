@@ -1,0 +1,19 @@
+#!/bin/sh
+
+echo "MARIADB_DATABASE: $MARIADB_DATABASE"
+echo "MARIADB_USER: $MARIADB_USER"
+echo "MARIADB_HOST: $MARIADB_HOST"
+echo "MARIADB_PASSWORD: $MARIADB_PASSWORD"
+
+cat << EOF > wp.db
+  FLUSH PRIVILEGES;
+  CREATE DATABASE IF NOT EXISTS $MARIADB_DATABASE;
+  CREATE USER IF NOT EXISTS '$MARIADB_USER'@'$MARIADB_HOST' IDENTIFIED BY '$MARIADB_PASSWORD';
+  GRANT ALL PRIVILEGES ON $MARIADB_DATABASE.* TO '$MARIADB_USER'@'$MARIADB_HOST';
+  FLUSH PRIVILEGES;
+EOF
+echo "Running mariadbd command..."
+mariadbd --user=mysql --bootstrap < wp.db
+echo "mariadbd command finished with exit code $?"
+
+exec "$@"
