@@ -31,6 +31,9 @@ build:
 container_logs:
 	@docker compose -f $(COMPOSE_FILE) logs -f
 
+image_ls:
+	@docker images
+
 volume_ls:
 	@docker volume ls
 
@@ -49,6 +52,15 @@ wordpress_logs:
 nginx_logs:
 	@docker logs -f nginx
 
+run_mariadb:
+	@docker exec -it mariadb bash
+
+run_wordpress:
+	@docker exec -it wordpress bash
+
+run_nginx:
+	@docker exec -it nginx bash
+
 clean:
 	@if [ -f $(ENV_FILE) ]; then docker compose -f $(COMPOSE_FILE) down --volumes; fi
 	@rm -rf $(MOUNT_DIR) $(ENV_FILE)
@@ -62,4 +74,4 @@ fclean: clean
 
 re: clean all
 
-.PHONY: all build mariadb_logs wordpress_logs nginx_logs container_logs docker_ps volume_ls network_ls clean re
+.PHONY: all build mariadb_logs wordpress_logs nginx_logs container_logs docker_ps image_ls volume_ls network_ls run_mariadb run_wordpress run_nginx clean re

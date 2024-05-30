@@ -2,6 +2,7 @@ services:
 
   # mysql service
   mysql:
+    image: mariadb
     build: ./requirements/mariadb
     container_name: mariadb
     restart: always
@@ -20,6 +21,7 @@ services:
   wordpress:
     depends_on:
       - mysql
+    image: wordpress
     build: ./requirements/wordpress
     container_name: wordpress
     restart: always
@@ -44,6 +46,7 @@ services:
   nginx:
     depends_on: 
       - wordpress
+    image: nginx
     build: ./requirements/nginx
     container_name: nginx
     restart: always

@@ -1,8 +1,8 @@
-FROM debian
+FROM debian:bookworm
 
 WORKDIR /var/www/html
 
-RUN apt update && apt upgrade -y && apt install -y php-mysql php-fpm curl vim
+RUN apt update && apt upgrade -y && apt install -y php-mysql php-fpm curl
 
 RUN sed -i 's/listen = \/run\/php\/php8.2-fpm.sock/listen = 0.0.0.0:9000/' /etc/php/8.2/fpm/pool.d/www.conf
 
