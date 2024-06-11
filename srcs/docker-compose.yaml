@@ -29,10 +29,10 @@ services:
       - ./.env
     environment:
       WP_DB_HOST: mysql
+      DOMAIN_NAME: ${DOMAIN_NAME}
       WP_DB_USER: ${WP_DB_USER}
       WP_DB_PASSWORD: ${WP_DB_PASSWORD}
       WP_DB_NAME: ${WP_DB_NAME}
-      WP_URL: ${WP_URL}
       WP_TITLE: ${WP_TITLE}
       WP_ADMIN_USER: ${WP_ADMIN_USER}
       WP_ADMIN_PASSWD: ${WP_ADMIN_PASSWD}
@@ -50,6 +50,10 @@ services:
     build: ./requirements/nginx
     container_name: nginx
     restart: always
+    env_file:
+      - ./.env
+    environment:
+      DOMAIN_NAME: ${DOMAIN_NAME}
     ports:
       - 443:443
     volumes:

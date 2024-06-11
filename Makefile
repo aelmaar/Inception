@@ -15,10 +15,10 @@ $(ENV_FILE):
 	@echo "*                   |_|                      *"
 	@echo "**********************************************"
 	@echo "\nLet's start filling some informations for our services\nbefore building them (make sure you fill them correctly 😉)\n"
-	@read -p "Enter Database name: " DB_NAME; if [ -z "$$DB_NAME" ]; then echo "Databse name cannot be empty"; exit 1; fi; echo "MARIADB_DATABASE=$$DB_NAME\nWP_DB_NAME=$$DB_NAME" > $(ENV_FILE)
+	@read -p "Enter Domain name: " DOMAIN_NAME; if [ -z "$$DOMAIN_NAME" ]; then echo "Domain name cannot be empty"; exit 1; fi; echo "DOMAIN_NAME=$$DOMAIN_NAME" > $(ENV_FILE)
+	@read -p "Enter Database name: " DB_NAME; if [ -z "$$DB_NAME" ]; then echo "Databse name cannot be empty"; exit 1; fi; echo "MARIADB_DATABASE=$$DB_NAME\nWP_DB_NAME=$$DB_NAME" >> $(ENV_FILE)
 	@read -p "Enter Database user: " DB_USER; if [ -z "$$DB_USER" ]; then echo "Databse user cannot be empty"; rm $(ENV_FILE); exit 1; fi; echo "MARIADB_USER=$$DB_USER\nWP_DB_USER=$$DB_USER" >> $(ENV_FILE)
 	@read -p "Enter Database password: " DB_PASSWD; if [ -z "$$DB_PASSWD" ]; then echo "Databse password cannot be empty"; rm $(ENV_FILE); exit 1; fi; echo "MARIADB_PASSWORD=$$DB_PASSWD\nWP_DB_PASSWORD=$$DB_PASSWD" >> $(ENV_FILE)
-	@read -p "Enter wordpress url: " WP_URL; if [ -z "$$WP_URL" ]; then echo "Wordpress url cannot be empty"; rm -rf $(ENV_FILE); exit 1; fi; echo "WP_URL=$$WP_URL" >> $(ENV_FILE)
 	@read -p "Enter wordpress title: " WP_TITLE; if [ -z "$$WP_TITLE" ]; then echo "Wordpress url cannot be empty"; rm -rf $(ENV_FILE); exit 1; fi; echo "WP_TITLE=$$WP_TITLE" >> $(ENV_FILE)
 	@read -p "Enter wordpress admin username: " WP_ADMIN_USER; if [ -z "$$WP_ADMIN_USER" ]; then echo "Wordpress admin username cannot be empty"; rm -rf $(ENV_FILE); exit 1; fi; echo "WP_ADMIN_USER=$$WP_ADMIN_USER" >> $(ENV_FILE)
 	@read -p "Enter wordpress admin password: " WP_ADMIN_PASSWD; if [ -z "$$WP_ADMIN_PASSWD" ]; then echo "Wordpress admin password cannot be empty"; rm -rf $(ENV_FILE); exit 1; fi; echo "WP_ADMIN_PASSWD=$$WP_ADMIN_PASSWD" >> $(ENV_FILE)
